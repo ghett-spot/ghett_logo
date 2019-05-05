@@ -1,132 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ghett_logo_animated</title>
-<link href='style.css' rel='stylesheet' type='text/css'>
+	<title>ghett_logo_animated</title>
+	<link href='style.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<div id='svg_wrapper'>
-	<svg viewBox='-430 -450 1920 2180' preserveAspectRatio='xMidYMid meet'>
-		<g id='logo_fill'>
-			<path d='m 123,25 l 866,0 96.4,96.4 0,288.8 -192.8,0 0,-192.8 -674,0 0,192.8 -192.4,0 0,-288.8 z'/>
-			<path d='m 26,602.6 l 192.6,0 0,198.8 288.6,282.6 96.8,0 288.6,-282.6 0,-198.8 192.8,0 0,270 -357,356 -345.4,0 -357,-356 z'/>
-			<path d='m 314.6,313.8 l 192.7,0 0,625.8 -192.7,-192.7 z'/>
-			<path d='m 603.8,313.8 l 192.7,0 0,433.2 -192.7,192.7 z'/>
-		</g>
-		<g id='logo_stroke'/>`
-	</svg>
-</div>
-<script type='text/javascript' src='/home/ghett/Documents/web/svg_curve_fragmentator/script.js'></script>
-<script type='text/javascript'>
-function getRandomInt(min,max){
-	min=Math.ceil(min);
-	max=Math.floor(max);
-	return Math.floor(Math.random()*(max-min+1))+min;
-}
+	<div id='svg_wrapper'>
+		<svg viewBox='-430 -450 1920 2180' preserveAspectRatio='xMidYMid meet'>
+			<g id='logo_fill'>
+				<path d='m 123,25 l 866,0 96.4,96.4 0,288.8 -192.8,0 0,-192.8 -674,0 0,192.8 -192.4,0 0,-288.8 z'/>
+				<path d='m 26,602.6 l 192.6,0 0,198.8 288.6,282.6 96.8,0 288.6,-282.6 0,-198.8 192.8,0 0,270 -357,356 -345.4,0 -357,-356 z'/>
+				<path d='m 314.6,313.8 l 192.7,0 0,625.8 -192.7,-192.7 z'/>
+				<path d='m 603.8,313.8 l 192.7,0 0,433.2 -192.7,192.7 z'/>
+			</g>
+			<g id='logo_stroke'/>
+		</svg>
+	</div>
 
-(function(){
-	var parent = document.getElementById('logo_stroke'),
-			path = document.createElementNS("http://www.w3.org/2000/svg","path");
-	var logo_stroke = {
-		"north": [[123,25],[862,0],[96.4,96.4],[0,288.8],[-188.8,0],[0,-192.8],[-672,0],[0,192.8],[-192.8,0],[0,-288.8],[96.4,-96.4]],
-		"west": [[314.6,313.8],[192.7,0],[0,625.8],[-192.7,-192.7],[0,-434]],
-		"east": [[603.8,313.8],[192.7,0],[0,433.2],[-192.7,192.7],[0,-625]],
-		"south":[[26,602.6],[192.6,0],[0,198.8],[288.6,282.6],[96.8,0],[288.6,-282.6],[0,-198.8],[192.8,0],[0,270],[-357,356],[-345.4,0],[-357,-356],[0,-270]]
-	};
+	<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/ghettofun/svg_curve_fragmentator@master/script.js'></script>
+	<script type='text/javascript'>
 
-	var prsd_storage = {};
-	for (key in logo_stroke) {
-		var clone = path.cloneNode();
-		clone.id = key;
-		parent.appendChild(clone);
+	function getRandomInt(min,max){
+		min=Math.ceil(min);
+		max=Math.floor(max);
+		return Math.floor(Math.random()*(max-min+1))+min;
 	}
 
-	fragmentator(logo_stroke, prsd_storage);
+	(function(){
+		var parent = document.getElementById('logo_stroke'),
+				path = document.createElementNS("http://www.w3.org/2000/svg","path"),
+				logo_stroke = {
+					"north": [[123,25],[862,0],[96.4,96.4],[0,288.8],[-188.8,0],[0,-192.8],[-672,0],[0,192.8],[-192.8,0],[0,-288.8],[96.4,-96.4]],
+					"west": [[314.6,313.8],[192.7,0],[0,625.8],[-192.7,-192.7],[0,-434]],
+					"east": [[603.8,313.8],[192.7,0],[0,433.2],[-192.7,192.7],[0,-625]],
+					"south":[[26,602.6],[192.6,0],[0,198.8],[288.6,282.6],[96.8,0],[288.6,-282.6],[0,-198.8],[192.8,0],[0,270],[-357,356],[-345.4,0],[-357,-356],[0,-270]]
+				},
+				prsd_storage = {};
 
-	//ANIMATION
-	for (key in prsd_storage) {
-		function timer(time,key) {
-			setTimeout(function(time){
-				var time = getRandomInt(250,650);
-				document.getElementById(key).remove();
-				var clone = path.cloneNode();
-				var clone_data = Object.keys(prsd_storage[key])[getRandomInt(0,Object.keys(prsd_storage[key]).length-1)];
-				clone.id = key;
-				clone.setAttribute('d',clone_data);
-				clone.style.cssText = 'animation-duration:'+time+'ms;';
-				parent.appendChild(clone);
-				var dasharray = '--dasharray-'+key;
-				var dashoffset = '--dashoffset-'+key;
-				document.documentElement.style.setProperty(dasharray,prsd_storage[key][clone_data]);
-				document.documentElement.style.setProperty(dashoffset,prsd_storage[key][clone_data]);
-				timer(time,key);
-			},time);
+		//temporary (lol) solution to start stroke animation
+		for (key in logo_stroke) {
+			let clone = path.cloneNode();
+			clone.id = key;
+			parent.appendChild(clone);
+		}
+
+		fragmentator(logo_stroke, prsd_storage);
+
+		//ANIMATION
+		for (key in prsd_storage) {
+			function timer(time,key) {
+
+				//for each path -- different setTimeout loop to async animations
+				//¯\_(ツ)_/¯ 
+				setTimeout(function(time){
+
+					//animation time
+					var time = getRandomInt(250,650);
+
+					//removing the previous path version to update the css animation
+					document.getElementById(key).remove();
+					var clone = path.cloneNode();
+
+					//get random piece of stroke from prsd_storage
+					var clone_data = Object.keys(prsd_storage[key])[getRandomInt(0,Object.keys(prsd_storage[key]).length-1)];
+
+					clone.id = key;
+					clone.setAttribute('d',clone_data);
+					clone.style.cssText = 'animation-duration:'+time+'ms;';
+					parent.appendChild(clone);
+					var dasharray = '--dasharray-'+key;
+					var dashoffset = '--dashoffset-'+key;
+					document.documentElement.style.setProperty(dasharray,prsd_storage[key][clone_data]);
+					document.documentElement.style.setProperty(dashoffset,prsd_storage[key][clone_data]);
+					timer(time,key);
+				},time);
+			};
+			timer(0,key);
 		};
-		timer(0,key);
-	};
-})();
+	})();
 
-	/*
-	for (key in logo_stroke) {
-		var clone = path.cloneNode();
-		clone.id = key;
-		parent.appendChild(clone);
-		prsd_storage[key] = {};
-
-		//-1 FROM END
-		var tmp_arr = logo_stroke[key].slice();
-		while (tmp_arr.length>1) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-			tmp_arr.pop();
-		};
-
-		//-1 FROM START
-		tmp_arr = logo_stroke[key].slice();
-		while (tmp_arr.length>2) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-			tmp_arr.shift();
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-		};
-
-		//-1 TO MIDDLE
-		tmp_arr = logo_stroke[key].slice();
-		tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-		tmp_arr.shift();
-		tmp_arr.pop();
-		
-		while (tmp_arr.length>2) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-			tmp_arr.shift();
-			tmp_arr.pop();
-		};
-	};
-*/
-</script>
+	</script>
 </body>
 </html>
