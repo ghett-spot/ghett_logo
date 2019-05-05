@@ -5,7 +5,6 @@
 	<link href='style.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
 	<div id='svg_wrapper'>
 		<svg viewBox='-430 -450 1920 2180' preserveAspectRatio='xMidYMid meet'>
 			<g id='logo_fill'>
@@ -17,16 +16,13 @@
 			<g id='logo_stroke'/>
 		</svg>
 	</div>
-
 	<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/ghettofun/svg_curve_fragmentator@master/script.js'></script>
 	<script type='text/javascript'>
-
 	function getRandomInt(min,max){
 		min=Math.ceil(min);
 		max=Math.floor(max);
 		return Math.floor(Math.random()*(max-min+1))+min;
 	}
-
 	(function(){
 		var parent = document.getElementById('logo_stroke'),
 				path = document.createElementNS("http://www.w3.org/2000/svg","path"),
@@ -37,34 +33,26 @@
 					"south":[[26,602.6],[192.6,0],[0,198.8],[288.6,282.6],[96.8,0],[288.6,-282.6],[0,-198.8],[192.8,0],[0,270],[-357,356],[-345.4,0],[-357,-356],[0,-270]]
 				},
 				prsd_storage = {};
-
 		//temporary (lol) solution to start stroke animation
 		for (key in logo_stroke) {
 			let clone = path.cloneNode();
 			clone.id = key;
 			parent.appendChild(clone);
 		}
-
 		fragmentator(logo_stroke, prsd_storage);
-
 		//ANIMATION
 		for (key in prsd_storage) {
 			function timer(time,key) {
-
 				//for each path -- different setTimeout loop to async animations
 				//¯\_(ツ)_/¯ 
 				setTimeout(function(time){
-
 					//animation time
 					var time = getRandomInt(250,650);
-
 					//removing the previous path version to update the css animation
 					document.getElementById(key).remove();
 					var clone = path.cloneNode();
-
 					//get random piece of stroke from prsd_storage
 					var clone_data = Object.keys(prsd_storage[key])[getRandomInt(0,Object.keys(prsd_storage[key]).length-1)];
-
 					clone.id = key;
 					clone.setAttribute('d',clone_data);
 					clone.style.cssText = 'animation-duration:'+time+'ms;';
@@ -79,7 +67,6 @@
 			timer(0,key);
 		};
 	})();
-
 	</script>
 </body>
 </html>
