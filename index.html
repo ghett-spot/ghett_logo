@@ -2,178 +2,47 @@
 <html>
 <head>
 <title>ghett_logo_animated</title>
-<style>
-body {
-	margin:0;
-	padding:0;
-	overflow:hidden;
-	background-color: rgb(40,40,40);
-}
-#svg_wrapper {
-	margin:0;
-	padding:0;
-	width:100vw;
-	height:100vh;
-	background-color: rgb(40,40,40);
-	/*filter: blur(1.4px);*/
-}
-svg {
-	width:100%;
-	height:100%;
-}
-#ghett_logo path {
-	fill:rgba(105,135,50);
-	stroke:none;
-}
-#stroke_storage path {
-	fill:none;
-	stroke:rgba(105,135,50);
-	stroke-width:6px;
-}
-#north {
-	stroke-dasharray: var(--dasharray-north);
-	stroke-dashoffset: var(--dashoffset-north);
-	animation: north_dash ease-in-out forwards;
-}
-@keyframes north_dash {
-	0% {stroke-dashoffset:var(--dashoffset-north);}
-	50% {stroke-dashoffset:0;}
-	100% {stroke-dashoffset:calc(var(--dashoffset-north)*-1px);}
-}
-#east {
-	stroke-dasharray: var(--dasharray-east);
-	stroke-dashoffset: var(--dashoffset-east);
-	animation: east_dash linear forwards;
-}
-@keyframes east_dash {
-	0% {stroke-dashoffset:var(--dashoffset-east);}
-	50% {stroke-dashoffset:0;}
-	100% {stroke-dashoffset:calc(var(--dashoffset-east)*-1px);}
-}
-#west {
-	stroke-dasharray: var(--dasharray-west);
-	stroke-dashoffset: var(--dashoffset-west);
-	animation: west_dash linear forwards;
-}
-@keyframes west_dash {
-	0% {stroke-dashoffset:var(--dashoffset-west);}
-	50% {stroke-dashoffset:0;}
-	100% {stroke-dashoffset:calc(var(--dashoffset-west)*-1px);}
-}
-#south {
-	stroke-dasharray: var(--dasharray-south);
-	stroke-dashoffset: var(--dashoffset-south);
-	animation: south_dash linear forwards;
-}
-@keyframes south_dash {
-	0% {stroke-dashoffset:var(--dashoffset-south);}
-	50% {stroke-dashoffset:0;}
-	100% {stroke-dashoffset:calc(var(--dashoffset-south)*-1px);}
-}
-/*filter: blur(0);  filter="url(#blurMe)"*/
-</style>
+<link href='style.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <div id='svg_wrapper'>
-	<svg viewBox='-430 -450 1920 2180' preserveAspectRatio='xMidYMid meet'><!--'-430 -450 1920 2180'-->
-		<defs>
-			<filter id="blurMe">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
-  </filter>
-		</defs>
-		<g>
-		<g id='ghett_logo'>
+	<svg viewBox='-430 -450 1920 2180' preserveAspectRatio='xMidYMid meet'>
+		<g id='logo_fill'>
 			<path d='m 123,25 l 866,0 96.4,96.4 0,288.8 -192.8,0 0,-192.8 -674,0 0,192.8 -192.4,0 0,-288.8 z'/>
 			<path d='m 26,602.6 l 192.6,0 0,198.8 288.6,282.6 96.8,0 288.6,-282.6 0,-198.8 192.8,0 0,270 -357,356 -345.4,0 -357,-356 z'/>
 			<path d='m 314.6,313.8 l 192.7,0 0,625.8 -192.7,-192.7 z'/>
 			<path d='m 603.8,313.8 l 192.7,0 0,433.2 -192.7,192.7 z'/>
 		</g>
-		<g id='stroke_storage'>
-		</g>
+		<g id='logo_stroke'/>`
 	</svg>
 </div>
-<script>
+<script type='text/javascript' src='/home/ghett/Documents/web/svg_curve_fragmentator/script.js'></script>
+<script type='text/javascript'>
 function getRandomInt(min,max){
 	min=Math.ceil(min);
 	max=Math.floor(max);
 	return Math.floor(Math.random()*(max-min+1))+min;
 }
-Number.prototype.round = function(places) {
-	return +(Math.round(this + "e+" + places)  + "e-" + places);
-}
-arr_merge = (arr0, arr1) => arr0.map((item, i) => (item + arr1[i]).round(2));
-arr_magnitude = (arr) => (Math.hypot(...arr));
 
 (function(){
-	var parent = document.getElementById('stroke_storage'),
+	var parent = document.getElementById('logo_stroke'),
 			path = document.createElementNS("http://www.w3.org/2000/svg","path");
-	var stroke_storage = {
-		"north": [[123,25],[862,0],[96.4,96.4],[0,288.8],[-188.8,0],[0,-192.8],[-672,0],[0,192.8],[-192.8,0],[0,-288.8],[96.4,-96.4]], //11 dots
-		"west": [[314.6,313.8],[192.7,0],[0,625.8],[-192.7,-192.7],[0,-434]], //4 dots
-		"east": [[603.8,313.8],[192.7,0],[0,433.2],[-192.7,192.7],[0,-625]], //4 dots
-		"south":[[26,602.6],[192.6,0],[0,198.8],[288.6,282.6],[96.8,0],[288.6,-282.6],[0,-198.8],[192.8,0],[0,270],[-357,356],[-345.4,0],[-357,-356],[0,-270]] //13 dots
+	var logo_stroke = {
+		"north": [[123,25],[862,0],[96.4,96.4],[0,288.8],[-188.8,0],[0,-192.8],[-672,0],[0,192.8],[-192.8,0],[0,-288.8],[96.4,-96.4]],
+		"west": [[314.6,313.8],[192.7,0],[0,625.8],[-192.7,-192.7],[0,-434]],
+		"east": [[603.8,313.8],[192.7,0],[0,433.2],[-192.7,192.7],[0,-625]],
+		"south":[[26,602.6],[192.6,0],[0,198.8],[288.6,282.6],[96.8,0],[288.6,-282.6],[0,-198.8],[192.8,0],[0,270],[-357,356],[-345.4,0],[-357,-356],[0,-270]]
 	};
 
 	var prsd_storage = {};
-	for (key in stroke_storage) {
+	for (key in logo_stroke) {
 		var clone = path.cloneNode();
 		clone.id = key;
 		parent.appendChild(clone);
-		prsd_storage[key] = {};
+	}
 
-		//-1 FROM END
-		var tmp_arr = stroke_storage[key].slice();
-		while (tmp_arr.length>1) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-			tmp_arr.pop();
-		};
-
-		//-1 FROM START
-		tmp_arr = stroke_storage[key].slice();
-		while (tmp_arr.length>2) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-			tmp_arr.shift();
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-		};
-
-		//-1 TO MIDDLE
-		tmp_arr = stroke_storage[key].slice();
-		tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-		tmp_arr.shift();
-		tmp_arr.pop();
-		
-		while (tmp_arr.length>2) {
-			var tmp_str = '';
-			var tmp_dash = 0;
-			tmp_arr.forEach(function(item,index){
-				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
-				if (index==0) {tmp_str='m';tmp_dash=0;}
-				else if (index==1) {tmp_str=tmp_str+' l'};
-				tmp_str = tmp_str + ' ' + item;
-			});
-			prsd_storage[key][tmp_str]=tmp_dash;
-			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
-			tmp_arr.shift();
-			tmp_arr.pop();
-		};
-	};
+	fragmentator(logo_stroke, prsd_storage);
 
 	//ANIMATION
 	for (key in prsd_storage) {
@@ -197,6 +66,67 @@ arr_magnitude = (arr) => (Math.hypot(...arr));
 		timer(0,key);
 	};
 })();
+
+	/*
+	for (key in logo_stroke) {
+		var clone = path.cloneNode();
+		clone.id = key;
+		parent.appendChild(clone);
+		prsd_storage[key] = {};
+
+		//-1 FROM END
+		var tmp_arr = logo_stroke[key].slice();
+		while (tmp_arr.length>1) {
+			var tmp_str = '';
+			var tmp_dash = 0;
+			tmp_arr.forEach(function(item,index){
+				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
+				if (index==0) {tmp_str='m';tmp_dash=0;}
+				else if (index==1) {tmp_str=tmp_str+' l'};
+				tmp_str = tmp_str + ' ' + item;
+			});
+			prsd_storage[key][tmp_str]=tmp_dash;
+			tmp_arr.pop();
+		};
+
+		//-1 FROM START
+		tmp_arr = logo_stroke[key].slice();
+		while (tmp_arr.length>2) {
+			var tmp_str = '';
+			var tmp_dash = 0;
+			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
+			tmp_arr.shift();
+			tmp_arr.forEach(function(item,index){
+				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
+				if (index==0) {tmp_str='m';tmp_dash=0;}
+				else if (index==1) {tmp_str=tmp_str+' l'};
+				tmp_str = tmp_str + ' ' + item;
+			});
+			prsd_storage[key][tmp_str]=tmp_dash;
+		};
+
+		//-1 TO MIDDLE
+		tmp_arr = logo_stroke[key].slice();
+		tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
+		tmp_arr.shift();
+		tmp_arr.pop();
+		
+		while (tmp_arr.length>2) {
+			var tmp_str = '';
+			var tmp_dash = 0;
+			tmp_arr.forEach(function(item,index){
+				tmp_dash = (tmp_dash+arr_magnitude(item)).round(0);
+				if (index==0) {tmp_str='m';tmp_dash=0;}
+				else if (index==1) {tmp_str=tmp_str+' l'};
+				tmp_str = tmp_str + ' ' + item;
+			});
+			prsd_storage[key][tmp_str]=tmp_dash;
+			tmp_arr[1] = arr_merge(tmp_arr[0],tmp_arr[1]);
+			tmp_arr.shift();
+			tmp_arr.pop();
+		};
+	};
+*/
 </script>
 </body>
 </html>

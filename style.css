@@ -1,0 +1,66 @@
+
+body {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+#svg_wrapper {
+	margin:0;
+	padding:0;
+	width:100vw;
+	height:100vh;
+	background-color: rgb(40,40,40);
+}
+svg {
+	width:100%;
+	height:100%;
+}
+#logo_fill path {
+	fill:rgba(105,135,50);
+	stroke:none;
+}
+#logo_stroke path {
+	fill:none;
+	stroke:rgba(105,135,50);
+	stroke-width:6px;
+}
+#north {
+	stroke-dasharray: var(--dasharray-north);
+	stroke-dashoffset: var(--dashoffset-north);
+	animation: north_dash ease-in-out forwards;
+}
+@keyframes north_dash {
+	0% {stroke-dashoffset:var(--dashoffset-north);}
+	50% {stroke-dashoffset:0;}
+	100% {stroke-dashoffset:calc(var(--dashoffset-north)*-1px);}
+}
+#east {
+	stroke-dasharray: var(--dasharray-east);
+	stroke-dashoffset: var(--dashoffset-east);
+	animation: east_dash linear forwards;
+}
+@keyframes east_dash {
+	0% {stroke-dashoffset:var(--dashoffset-east);}
+	50% {stroke-dashoffset:0;}
+	100% {stroke-dashoffset:calc(var(--dashoffset-east)*-1px);}
+}
+#west {
+	stroke-dasharray: var(--dasharray-west);
+	stroke-dashoffset: var(--dashoffset-west);
+	animation: west_dash linear forwards;
+}
+@keyframes west_dash {
+	0% {stroke-dashoffset:var(--dashoffset-west);}
+	50% {stroke-dashoffset:0;}
+	100% {stroke-dashoffset:calc(var(--dashoffset-west)*-1px);}
+}
+#south {
+	stroke-dasharray: var(--dasharray-south);
+	stroke-dashoffset: var(--dashoffset-south);
+	animation: south_dash linear forwards;
+}
+@keyframes south_dash {
+	0% {stroke-dashoffset:var(--dashoffset-south);}
+	50% {stroke-dashoffset:0;}
+	100% {stroke-dashoffset:calc(var(--dashoffset-south)*-1px);}
+}
